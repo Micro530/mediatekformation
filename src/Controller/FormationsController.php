@@ -1,11 +1,12 @@
 <?php
 namespace App\Controller;
 
+use App\Entity\Formation;
+use App\Repository\FormationRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use App\Repository\FormationRepository;
 
 /**
  * Description of FormationsController
@@ -52,7 +53,26 @@ class FormationsController extends AbstractController {
         return $this->render(self::PAGEFORMATIONS, [
            'formations' => $formations
         ]);
-    }   
+    }
+    /**
+     * @Route("/formations/triNiveau/{valeur}", name="formations.niveau")
+     * @param type $valeur
+     * @return Response
+     */
+    public function sortNiveau($valeur): Response{
+        $formations = $this->repository->findAllOrderBy('title', 'DESC');
+        $formation  = new Formation();
+        $lesFormations = array();
+        foreach($formations as $formation){
+            if($formation->getIdNiveau()->getNiveauDifficulte() == $valeur){
+                array_push($lesFormations, $formation);
+            };
+        }; 
+        return $this->render(self::PAGEFORMATIONS, [
+           'formations' => $lesFormations
+        ]);
+    }
+    
         
     /**
      * @Route("/formations/recherche/{champ}", name="formations.findallcontain")

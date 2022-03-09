@@ -8,27 +8,34 @@
 
 namespace App\Controller\admin;
 
-use App\Repository\FormationRepository;
+use App\Entity\Niveau;
 use App\Repository\NiveauRepository;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\HttpFoundation\Request;
 
 class AdminNiveauxController extends AbstractController{
     private const PAGEFORMATIONS = "admin/admin.niveaux.html.twig";
 
     /**
      *
-     * @var FormationRepository
+     * @var NiveauRepository
      */
     private $repository;
-
     /**
      * 
-     * @param FormationRepository $repository
+     * @var EntityManagerInterface
      */
-    function __construct(NiveauRepository $repository) {
+    private $om;
+    /**
+     * 
+     * @param NiveauRepository $repository
+     */
+    function __construct(NiveauRepository $repository, EntityManagerInterface $om) {
         $this->repository = $repository;
+        $this->om = $om;
     }
 
     /**
@@ -41,4 +48,35 @@ class AdminNiveauxController extends AbstractController{
             'niveaux' => $niveaux
         ]);
     }
+    /**
+     * @Route("/admin/niveau/suppr/{id}", name="admin.niveau.suppr")
+     * @param Niveau $niveau
+     * @return Response
+     */
+    public function suppr(Niveau $niveau): Response{
+        if($niveau->getFormations()->count() == 0){
+            $this->om->remove($niveau);
+            $this->om->flush();
+        }
+        return $this->redirectToRoute('admin.niveaux');
+    }
+    
+    /**
+     * @Route("/admin/niveaux/ajout", name="admin.niveau.ajout")
+     * @param Request $request
+     * @return Response
+     */
+    public function ajoutNiveau(Request $request): Response{
+        if($this->isCsrfTokenValid('token_ajouter', $request->get('_token'))){
+            if($request != ""){
+                $niveau = new Niveau();
+                $valeur = $request->get("ajouter");
+                $niveau->setNiveauDifficulte($valeur);
+                $this->om->persist($niveau);
+                $this->om->flush();
+            }
+        }
+        return $this->redirectToRoute("admin.niveaux");
+    }
+    
 }

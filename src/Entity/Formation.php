@@ -49,6 +49,11 @@ class Formation
      */
     private $videoId;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=Niveau::class, inversedBy="formations")
+     */
+    private $idNiveau;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -129,4 +134,16 @@ class Formation
 
         return $this;
     }
+
+    public function getIdNiveau(): ?Niveau
+    {
+        return $this->idNiveau;
+    }
+
+    public function setIdNiveau(?Niveau $idNiveau): self
+    {
+        $this->idNiveau = $idNiveau;
+
+        return $this;
+    }   
 }

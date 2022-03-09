@@ -24,7 +24,7 @@ class FormationsController extends AbstractController {
     private $repository;
 
     /**
-     * 
+     * le contructeur du contoleur
      * @param FormationRepository $repository
      */
     function __construct(FormationRepository $repository) {
@@ -32,6 +32,7 @@ class FormationsController extends AbstractController {
     }
 
     /**
+     * permet de créer la vue
      * @Route("/formations", name="formations")
      * @return Response
      */
@@ -43,6 +44,7 @@ class FormationsController extends AbstractController {
     }
     
     /**
+     * permet de trier sur les formations dans lordre choisi
      * @Route("/formations/tri/{champ}/{ordre}", name="formations.sort")
      * @param type $champ
      * @param type $ordre
@@ -55,6 +57,7 @@ class FormationsController extends AbstractController {
         ]);
     }
     /**
+     * permet de trier sur le niveau
      * @Route("/formations/triNiveau/{valeur}", name="formations.niveau")
      * @param type $valeur
      * @return Response
@@ -75,6 +78,7 @@ class FormationsController extends AbstractController {
     
         
     /**
+     * permet de récupérer toutes les formations qui contiennent la valeur cherché
      * @Route("/formations/recherche/{champ}", name="formations.findallcontain")
      * @param type $champ
      * @param Request $request
@@ -92,6 +96,7 @@ class FormationsController extends AbstractController {
     }  
     
     /**
+     * pemret de récuperer une seul formation par id
      * @Route("/formations/formation/{id}", name="formations.showone")
      * @param type $id
      * @return Response

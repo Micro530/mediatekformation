@@ -31,7 +31,7 @@ class AdminFormationsController extends AbstractController{
      */
     private $om;
     /**
-     * 
+     * le contructeur du controleur
      * @param FormationRepository $repository
      */
     function __construct(FormationRepository $repository, EntityManagerInterface $om) {
@@ -40,6 +40,7 @@ class AdminFormationsController extends AbstractController{
     }
 
     /**
+     * permet de créer la vue
      * @Route("/admin", name="admin.formations")
      * @return Response
      */
@@ -50,6 +51,7 @@ class AdminFormationsController extends AbstractController{
         ]);
     }
     /**
+     * permet de supprimer une formation
      * @Route("/admin/suppr/{id}", name="admin.formation.suppr")
      * @param Formation $formation
      * @return Response
@@ -60,6 +62,7 @@ class AdminFormationsController extends AbstractController{
         return $this->redirectToRoute('admin.formations');
     }
     /**
+     * permet e modifier une formation
      * @Route("/admin/edit/{id}", name="admin.formation.edit")
      * @param Formation $formation
      * @param Request $request
@@ -79,6 +82,7 @@ class AdminFormationsController extends AbstractController{
         ]);
     }
     /**
+     * permet d'ajouter une formation
      * @Route("/admin/ajout", name="admin.formation.ajout")
      * @param Request $request
      * @return Response
@@ -99,6 +103,7 @@ class AdminFormationsController extends AbstractController{
         ]);
     }
     /**
+     * permet de trier les formations sur l'ordre choisi
      * @Route("/admin/formations/tri/{champ}/{ordre}", name="admin.formations.sort")
      * @param type $champ
      * @param type $ordre
@@ -111,6 +116,7 @@ class AdminFormationsController extends AbstractController{
         ]);
     }
     /**
+     * permet de trier sur le niveau choisi
      * @Route("/admin/formations/triNiveau/{valeur}", name="admin.formations.niveau")
      * @param type $valeur
      * @return Response
@@ -129,6 +135,7 @@ class AdminFormationsController extends AbstractController{
         ]);
     }
     /**
+     * Permet de retourner toutes les formations qui contiennent la valeur cherché
      * @Route("/admin/formations/recherche/{champ}", name="admin.formations.findallcontain")
      * @param type $champ
      * @param Request $request

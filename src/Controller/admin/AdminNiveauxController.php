@@ -30,7 +30,7 @@ class AdminNiveauxController extends AbstractController{
      */
     private $om;
     /**
-     * 
+     * le constructeur du controleur
      * @param NiveauRepository $repository
      */
     function __construct(NiveauRepository $repository, EntityManagerInterface $om) {
@@ -39,6 +39,7 @@ class AdminNiveauxController extends AbstractController{
     }
 
     /**
+     * Permet d'ouvrir la vue
      * @Route("/admin/niveaux", name="admin.niveaux")
      * @return Response
      */
@@ -49,6 +50,7 @@ class AdminNiveauxController extends AbstractController{
         ]);
     }
     /**
+     * permet de supprimer un niveau
      * @Route("/admin/niveau/suppr/{id}", name="admin.niveau.suppr")
      * @param Niveau $niveau
      * @return Response
@@ -62,6 +64,7 @@ class AdminNiveauxController extends AbstractController{
     }
     
     /**
+     * permet d'ajouter un niveau
      * @Route("/admin/niveaux/ajout", name="admin.niveau.ajout")
      * @param Request $request
      * @return Response

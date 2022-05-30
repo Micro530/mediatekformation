@@ -1,8 +1,8 @@
 **Pour acceder à la base de données**
-URL : bddawsfree.ci10i3jrrmqo.eu-west-3.rds.amazonaws.com
+URL : quentinstac-ressources.fr
 Port : 3306
-User : admin
-Mot de passe : adminaws530
+User : yvqk9166_adminMediatekFormation
+Mot de passe : Admin13579@APE5!
 
 **Pour acceder au backend de l'application**
 User : admin
